@@ -48,6 +48,10 @@ Client.prototype.remove = function* (key) {
   yield fs.unlink(filepath);
 };
 
+/**
+ * escape '/' and '\'
+ */
+
 Client.prototype._getpath = function (key) {
   key = key.replace(/\//g, '-').replace(/\\/g, '_');
   return path.join(this.dir, key);

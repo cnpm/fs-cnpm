@@ -30,11 +30,11 @@ $ npm install fs-cnpm
 
 All the APIs are following [cnpm nfs guide](https://github.com/cnpm/cnpmjs.org/wiki/NFS-Guide).
 
-- `uploadBuffer`
+- `uploadBuffer`: upload a file
 
-- `download`
+- `download`: download file by key
 
-- `remove`
+- `remove`: remove file by key
 
 ### License
 
