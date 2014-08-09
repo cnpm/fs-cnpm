@@ -49,5 +49,6 @@ Client.prototype.remove = function* (key) {
 };
 
 Client.prototype._getpath = function (key) {
-  return path.join(this.dir, key).replace(/\//g, '-').replace(/\\/g, '_');
+  key = key.replace(/\//g, '-').replace(/\\/g, '_');
+  return path.join(this.dir, key);
 };
