@@ -18,7 +18,7 @@ fs-cnpm
 [david-image]: https://img.shields.io/david/cnpm/fs-cnpm.svg?style=flat
 [david-url]: https://david-dm.org/cnpm/fs-cnpm
 
-fs wrapper for cnpm
+fs storage wrapper for cnpm
 
 ## Installation
 
@@ -28,13 +28,13 @@ $ npm install fs-cnpm
 
 ## API
 
-follow: [cnpm nfs guide](https://github.com/cnpm/cnpmjs.org/wiki/NFS-Guide)
+All the APIs are following [cnpm nfs guide](https://github.com/cnpm/cnpmjs.org/wiki/NFS-Guide).
 
-- uploadBuffer
+- `uploadBuffer`
 
-- download
+- `download`
 
-- remove
+- `remove`
 
 ### License
 
