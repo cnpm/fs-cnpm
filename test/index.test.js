@@ -45,6 +45,14 @@ describe('fs-cnpm', function () {
     });
   });
 
+  describe('upload()', function () {
+    it('should upload ok', function* () {
+      var res = yield client.upload(path.join(dir, 'hello'), {key: 'hello1'});
+      res.key.should.equal('hello1');
+      (yield fs.readFile(path.join(dir, 'hello1'), 'utf8')).should.equal('hello');
+    });
+  });
+
   describe('download()', function () {
     it('should download ok', function* () {
       var dest = path.join(dir, 'world');
@@ -57,7 +65,9 @@ describe('fs-cnpm', function () {
   describe('remove()', function () {
     it('should remove ok', function* () {
       yield client.remove('hello');
+      yield client.remove('hello1');
       (yield fs.exists(path.join(dir, 'hello'))).should.equal(false);
+      (yield fs.exists(path.join(dir, 'hello1'))).should.equal(false);
     });
   });
 });

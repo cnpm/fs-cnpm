@@ -31,6 +31,13 @@ function Client(options) {
   mkdirp.sync(this.dir);
 }
 
+Client.prototype.upload = function* (filepath, options) {
+  var destpath = this._getpath(options.key);
+  var content = yield fs.readFile(filepath);
+  yield fs.writeFile(destpath, content);
+  return { key: options.key };
+};
+
 Client.prototype.uploadBuffer = function* (content, options) {
   var filepath = this._getpath(options.key);
   yield fs.writeFile(filepath, content);
