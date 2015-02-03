@@ -31,8 +31,15 @@ function Client(options) {
   mkdirp.sync(this.dir);
 }
 
+function ensureDirExists(filepath) {
+  return function (callback) {
+    mkdirp(path.dirname(filepath), callback);
+  };
+}
+
 Client.prototype.upload = function* (filepath, options) {
   var destpath = this._getpath(options.key);
+  yield ensureDirExists(destpath);
   var content = yield fs.readFile(filepath);
   yield fs.writeFile(destpath, content);
   return { key: options.key };
@@ -40,6 +47,7 @@ Client.prototype.upload = function* (filepath, options) {
 
 Client.prototype.uploadBuffer = function* (content, options) {
   var filepath = this._getpath(options.key);
+  yield ensureDirExists(filepath);
   yield fs.writeFile(filepath, content);
   return { key: options.key };
 };
@@ -60,6 +68,5 @@ Client.prototype.remove = function* (key) {
  */
 
 Client.prototype._getpath = function (key) {
-  key = key.replace(/\//g, '-').replace(/\\/g, '_');
   return path.join(this.dir, key);
 };

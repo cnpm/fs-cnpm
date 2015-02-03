@@ -42,6 +42,14 @@ describe('fs-cnpm', function () {
       var res = yield client.uploadBuffer('hello', {key: 'hello'});
       res.key.should.equal('hello');
       (yield fs.readFile(path.join(dir, 'hello'), 'utf8')).should.equal('hello');
+
+      var res = yield client.uploadBuffer('hello', {key: '/a/b/c/d/e/f/g.txt'});
+      res.key.should.equal('/a/b/c/d/e/f/g.txt');
+      (yield fs.readFile(path.join(dir, '/a/b/c/d/e/f/g.txt'), 'utf8')).should.equal('hello');
+
+      var res = yield client.uploadBuffer('hello', {key: 'foo/-/foo-1.3.2.txt'});
+      res.key.should.equal('foo/-/foo-1.3.2.txt');
+      (yield fs.readFile(path.join(dir, 'foo/-/foo-1.3.2.txt'), 'utf8')).should.equal('hello');
     });
   });
 
@@ -66,6 +74,7 @@ describe('fs-cnpm', function () {
     it('should remove ok', function* () {
       yield client.remove('hello');
       yield client.remove('hello1');
+      yield client.remove('foo/-/foo-1.3.2.txt');
       (yield fs.exists(path.join(dir, 'hello'))).should.equal(false);
       (yield fs.exists(path.join(dir, 'hello1'))).should.equal(false);
     });
