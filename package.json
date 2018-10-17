@@ -43,6 +43,6 @@
   "ci": {
     "type": "travis",
     "os": "linux, osx, windows",
-    "versions": "8, 10"
+    "version": "8, 10"
   }
 }
