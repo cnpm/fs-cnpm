@@ -9,7 +9,7 @@
   "scripts": {
     "test": "egg-bin test",
     "ci": "npm run lint && egg-bin cov",
-    "lint": "eslint test *.js"
+    "lint": "eslint --fix test *.js"
   },
   "keywords": [
     "fs",
