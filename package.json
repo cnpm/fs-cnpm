@@ -42,9 +42,6 @@
   },
   "ci": {
     "type": "travis",
-    "os": {
-      "travis": "linux, osx, windows"
-    },
     "version": "8, 10"
   }
 }
