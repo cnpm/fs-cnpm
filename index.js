@@ -1,72 +1,52 @@
-/*!
- * fs-cnpm - index.js
- * Copyright(c) 2014 dead_horse <dead_horse@qq.com>
- * MIT Licensed
- */
-
 'use strict';
 
-/**
- * Module dependencies.
- */
+const path = require('path');
+const fs = require('mz/fs');
+const mkdirp = require('mz-modules/mkdirp');
 
-var mkdirp = require('mkdirp');
-var path = require('path');
-var fs = require('co-fs');
-
-/**
- * Expose `Client`
- */
-module.exports = Client;
-
-function Client(options) {
-  if (!options || !options.dir) {
-    throw new Error('need present options.dir');
+class LocalDiskClient {
+  constructor(options) {
+    if (!options || !options.dir) {
+      throw new Error('need present options.dir');
+    }
+    this.dir = options.dir;
   }
 
-  if (!(this instanceof Client)) {
-    return new Client(options);
+  async upload(filepath, options) {
+    const destpath = this._getpath(options.key);
+    await this._ensureDirExists(filepath);
+    const content = await fs.readFile(filepath);
+    await fs.writeFile(destpath, content);
+    return { key: options.key };
   }
-  this.dir = options.dir;
-  mkdirp.sync(this.dir);
+
+  async uploadBuffer(content, options) {
+    const filepath = this._getpath(options.key);
+    await this._ensureDirExists(filepath);
+    await fs.writeFile(filepath, content);
+    return { key: options.key };
+  }
+
+  async download(key, savePath) {
+    const filepath = this._getpath(key);
+    const content = await fs.readFile(filepath);
+    await fs.writeFile(savePath, content);
+  }
+
+  async remove(key) {
+    const filepath = this._getpath(key);
+    if (await fs.exists(filepath)) {
+      await fs.unlink(filepath);
+    }
+  }
+
+  async _ensureDirExists(filepath) {
+    return await mkdirp(path.dirname(filepath));
+  }
+
+  _getpath(key) {
+    return path.join(this.dir, key);
+  }
 }
 
-function ensureDirExists(filepath) {
-  return function (callback) {
-    mkdirp(path.dirname(filepath), callback);
-  };
-}
-
-Client.prototype.upload = function* (filepath, options) {
-  var destpath = this._getpath(options.key);
-  yield ensureDirExists(destpath);
-  var content = yield fs.readFile(filepath);
-  yield fs.writeFile(destpath, content);
-  return { key: options.key };
-};
-
-Client.prototype.uploadBuffer = function* (content, options) {
-  var filepath = this._getpath(options.key);
-  yield ensureDirExists(filepath);
-  yield fs.writeFile(filepath, content);
-  return { key: options.key };
-};
-
-Client.prototype.download = function* (key, savePath, options) {
-  var filepath = this._getpath(key);
-  var content = yield fs.readFile(filepath);
-  yield fs.writeFile(savePath, content);
-};
-
-Client.prototype.remove = function* (key) {
-  var filepath = this._getpath(key);
-  yield fs.unlink(filepath);
-};
-
-/**
- * escape '/' and '\'
- */
-
-Client.prototype._getpath = function (key) {
-  return path.join(this.dir, key);
-};
+module.exports = LocalDiskClient;

@@ -15,3 +15,4 @@ node_modules
 dump.rdb
 .DS_Store
 test/dist
+.nyc_output
