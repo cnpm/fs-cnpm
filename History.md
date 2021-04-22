@@ -1,4 +1,10 @@
 
+2.1.0 / 2021-04-22
+==================
+
+**features**
+  * [[`a2fee54`](http://github.com/cnpm/fs-cnpm/commit/a2fee544305393cace740ae67a3f587d93aa078d)] - feat: impl list api (#4) (killa <<killa123@126.com>>)
+
 2.0.0 / 2018-10-24
 ==================
 
