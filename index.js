@@ -14,7 +14,7 @@ class LocalDiskClient {
 
   async upload(filepath, options) {
     const destpath = this._getpath(options.key);
-    await this._ensureDirExists(filepath);
+    await this._ensureDirExists(destpath);
     const content = await fs.readFile(filepath);
     await fs.writeFile(destpath, content);
     return { key: options.key };
@@ -42,6 +42,11 @@ class LocalDiskClient {
 
   async _ensureDirExists(filepath) {
     return await mkdirp(path.dirname(filepath));
+  }
+
+  async list(prefix) {
+    const destpath = this._getpath(prefix);
+    return await fs.readdir(destpath);
   }
 
   _getpath(key) {

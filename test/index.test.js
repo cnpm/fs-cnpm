@@ -73,4 +73,17 @@ describe('fs-cnpm', () => {
       assert.equal(await fs.exists(path.join(dir, 'foo/-/foo-1.3.2.txt')), false);
     });
   });
+
+  describe('list()', () => {
+    beforeEach(async () => {
+      await client.upload(__filename, { key: 'hello/upload.js' });
+    });
+
+    it('should upload ok', async () => {
+      const files = await client.list('hello');
+      assert.deepStrictEqual(files, [
+        'upload.js',
+      ]);
+    });
+  });
 });
