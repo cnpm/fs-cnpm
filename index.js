@@ -27,6 +27,11 @@ class LocalDiskClient {
     return { key: options.key };
   }
 
+  async createDownloadStream(key) {
+    const filepath = this._getpath(key);
+    return fs.createReadStream(filepath);
+  }
+
   async download(key, savePath) {
     const filepath = this._getpath(key);
     const content = await fs.readFile(filepath);

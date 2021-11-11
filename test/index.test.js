@@ -4,6 +4,7 @@ const FSClient = require('..');
 const path = require('path');
 const fs = require('mz/fs');
 const assert = require('assert');
+const pump = require('mz-modules/pump');
 
 const dir = path.join(__dirname, 'dist');
 
@@ -62,6 +63,18 @@ describe('fs-cnpm', () => {
     });
   });
 
+  describe('createDownloadStream()', () => {
+    it('should get download stream ok', async () => {
+      await client.uploadBuffer('hello bar', { key: 'hello/download-bar.tgz' });
+      const dest = path.join(dir, 'world');
+      const stream = await client.createDownloadStream('hello/download-bar.tgz');
+      const writeStream = fs.createWriteStream(dest);
+      await pump(stream, writeStream);
+      assert.equal(await fs.readFile(dest, 'utf8'), 'hello bar');
+      await fs.unlink(dest);
+    });
+  });
+
   describe('remove()', () => {
     it('should remove ok', async () => {
       await client.uploadBuffer('hello bar', { key: 'hello/download-bar.tgz' });
@@ -76,11 +89,11 @@ describe('fs-cnpm', () => {
 
   describe('list()', () => {
     beforeEach(async () => {
-      await client.upload(__filename, { key: 'hello/upload.js' });
+      await client.upload(__filename, { key: 'hello2222/upload.js' });
     });
 
     it('should upload ok', async () => {
-      const files = await client.list('hello');
+      const files = await client.list('hello2222');
       assert.deepStrictEqual(files, [
         'upload.js',
       ]);
