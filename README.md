@@ -2,18 +2,13 @@ fs-cnpm
 ---------------
 
 [![NPM version][npm-image]][npm-url]
-[![build status][travis-image]][travis-url]
+[![Node.js CI](https://github.com/cnpm/fs-cnpm/actions/workflows/nodejs.yml/badge.svg)](https://github.com/cnpm/fs-cnpm/actions/workflows/nodejs.yml)
 [![Test coverage][coveralls-image]][coveralls-url]
-[![David deps][david-image]][david-url]
 
 [npm-image]: https://img.shields.io/npm/v/fs-cnpm.svg?style=flat
 [npm-url]: https://npmjs.org/package/fs-cnpm
-[travis-image]: https://img.shields.io/travis/cnpm/fs-cnpm.svg?style=flat
-[travis-url]: https://travis-ci.org/cnpm/fs-cnpm
 [coveralls-image]: https://img.shields.io/coveralls/cnpm/fs-cnpm.svg?style=flat
 [coveralls-url]: https://coveralls.io/r/cnpm/fs-cnpm?branch=master
-[david-image]: https://img.shields.io/david/cnpm/fs-cnpm.svg?style=flat
-[david-url]: https://david-dm.org/cnpm/fs-cnpm
 
 fs storage wrapper for cnpm
 

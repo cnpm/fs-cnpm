@@ -1,4 +1,10 @@
 
+2.2.0 / 2021-11-11
+==================
+
+**features**
+  * [[`af51104`](http://github.com/cnpm/fs-cnpm/commit/af5110450b9b3cbf1090402b19b3776bbd087dd3)] - feat: support createDownloadStream api (#5) (fengmk2 <<fengmk2@gmail.com>>)
+
 2.1.0 / 2021-04-22
 ==================
 

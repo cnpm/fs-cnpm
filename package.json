@@ -1,6 +1,6 @@
 {
   "name": "fs-cnpm",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "fs wrapper for cnpm",
   "main": "index.js",
   "files": [
