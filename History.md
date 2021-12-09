@@ -1,4 +1,10 @@
 
+2.3.0 / 2021-12-09
+==================
+
+**features**
+  * [[`a63a78b`](http://github.com/cnpm/fs-cnpm/commit/a63a78be23570a2bba4554456a5a674eb213a39c)] - feat: add readBytes and check file exists first (#6) (fengmk2 <<fengmk2@gmail.com>>)
+
 2.2.0 / 2021-11-11
 ==================
 
