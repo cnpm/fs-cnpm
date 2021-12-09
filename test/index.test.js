@@ -73,6 +73,24 @@ describe('fs-cnpm', () => {
       assert.equal(await fs.readFile(dest, 'utf8'), 'hello bar');
       await fs.unlink(dest);
     });
+
+    it('should get undefined when file not exists', async () => {
+      const stream = await client.createDownloadStream('hello/notexists.tgz');
+      assert.equal(stream, undefined);
+    });
+  });
+
+  describe('readBytes()', () => {
+    it('should get bytes ok', async () => {
+      await client.uploadBuffer('hello bar', { key: 'hello/download-bar.tgz' });
+      const bytes = await client.readBytes('hello/download-bar.tgz');
+      assert.equal(bytes.toString(), 'hello bar');
+    });
+
+    it('should get undefined when file not exists', async () => {
+      const bytes = await client.readBytes('hello/notexists.tgz');
+      assert.equal(bytes, undefined);
+    });
   });
 
   describe('remove()', () => {

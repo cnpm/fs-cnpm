@@ -9,8 +9,7 @@
   "scripts": {
     "test": "egg-bin test",
     "ci": "npm run lint && egg-bin cov",
-    "lint": "eslint --fix test *.js",
-    "contributor": "git-contributor"
+    "lint": "eslint --fix test *.js"
   },
   "keywords": [
     "fs",
@@ -36,8 +35,7 @@
     "egg-bin": "^4.9.0",
     "egg-ci": "^1.9.2",
     "eslint": "^5.7.0",
-    "eslint-config-egg": "^7.1.0",
-    "git-contributor": "^1.0.10"
+    "eslint-config-egg": "^7.1.0"
   },
   "engines": {
     "node": ">= 8.0.0"
