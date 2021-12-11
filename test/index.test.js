@@ -45,6 +45,20 @@ describe('fs-cnpm', () => {
     });
   });
 
+  describe('appendBuffer()', () => {
+    it('should append ok', async () => {
+      let res = await client.appendBuffer('hello', { key: 'hello/bar.txt' });
+      assert(res.key === 'hello/bar.txt');
+      assert.equal(await fs.readFile(path.join(dir, res.key), 'utf8'), 'hello');
+      res = await client.appendBuffer(' world', { key: 'hello/bar.txt' });
+      assert(res.key === 'hello/bar.txt');
+      assert.equal(await fs.readFile(path.join(dir, res.key), 'utf8'), 'hello world');
+      res = await client.appendBuffer('\nagain', { key: 'hello/bar.txt' });
+      assert(res.key === 'hello/bar.txt');
+      assert.equal(await fs.readFile(path.join(dir, res.key), 'utf8'), 'hello world\nagain');
+    });
+  });
+
   describe('upload()', () => {
     it('should upload ok', async () => {
       const res = await client.upload(__filename, { key: 'hello/upload.js' });
