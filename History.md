@@ -1,4 +1,10 @@
 
+2.4.0 / 2021-12-11
+==================
+
+**features**
+  * [[`39da60f`](http://github.com/cnpm/fs-cnpm/commit/39da60f67bd1ade0c7a9f75bf505f7fe5e090a84)] - feat: support appendBuffer(content, options) (#7) (fengmk2 <<fengmk2@gmail.com>>)
+
 2.3.0 / 2021-12-09
 ==================
 
