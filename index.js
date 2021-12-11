@@ -27,6 +27,13 @@ class LocalDiskClient {
     return { key: options.key };
   }
 
+  async appendBuffer(content, options) {
+    const filepath = this._getpath(options.key);
+    await this._ensureDirExists(filepath);
+    await fs.appendFile(filepath, content);
+    return { key: options.key };
+  }
+
   // stream or undefined
   async createDownloadStream(key) {
     const filepath = this._getpath(key);
