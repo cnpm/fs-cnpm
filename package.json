@@ -39,9 +39,5 @@
   },
   "engines": {
     "node": ">= 8.0.0"
-  },
-  "ci": {
-    "type": "github",
-    "version": "8, 10, 12, 14, 16"
   }
 }
